@@ -29,59 +29,18 @@
       </v-list>
     </v-navigation-drawer>
     <v-content>
-      <v-app-bar class="address-bar">
-        <v-select
-          :items="httpMethods"
-          label="Method"
-          class="http-method-select"
-        ></v-select>
-        <v-text-field
-          label="API Endpoint Address"
-          ></v-text-field>
-         <!-- <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="First name"
-            required
-          ></v-text-field> -->
-      </v-app-bar>
-      <v-navigation-drawer>
-        <v-list-item>
-          Test config settings here...
-        </v-list-item>
-
-        <v-list
-          dense
-          nav
-        >
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-        <HelloWorld/>
+        <Main/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Main from './components/Main';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Main,
   },
   data: () => ({
     items: [],
