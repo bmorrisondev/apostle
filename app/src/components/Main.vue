@@ -48,7 +48,9 @@
 
       </v-expansion-panels>
     </div>
-    <div class="grid-right">Request body will be editted here.</div>
+    <div class="grid-right">
+      <textarea class="request-body-textarea"></textarea>
+    </div>
   </v-container>
 </template>
 
@@ -93,5 +95,9 @@ export default {
   position: relative;
   height: 100%;
   align-items: stretch;
+}
+.request-body-textarea {
+  height: 100%;
+  width: 100%;
 }
 </style>
