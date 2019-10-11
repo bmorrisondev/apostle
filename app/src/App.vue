@@ -118,7 +118,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+html {
+  overflow: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 .app-drawer {
   background-color: #094074 !important;
 }
