@@ -1,5 +1,6 @@
 <template>
   <v-app>
+
      <v-navigation-drawer app permanent class="app-drawer">
       <v-list-item>
         <v-list-item-content>
@@ -8,80 +9,56 @@
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-
-      <v-list
-        dense
-        nav
-      >
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
+          v-for="project in testProjects"
+          :key="project.name"
         >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+          <!-- <v-list-item-icon>
+            <font-awesome-icon icon="angle-right" />
+          </v-list-item-icon> -->
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>
+              <b>{{ project.name }}</b>
+            </v-list-item-title>
+            <v-list dense class="menu-list test-list">
+              <v-list-item class="test" v-for="test in project.tests" :key="test.name">
+                <v-list-item-content>
+                  {{test.name}}
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+            <v-list dense class="menu-list collection-list">
+              <v-list-item class="collection" v-for="collection in project.collections" :key="collection.name">
+                <v-list-item-content>
+                  <b>{{collection.name}}</b>
+                  <v-list class="menu-list test-list">
+                    <v-list-item class="test" v-for="test in collection.tests" :key="test.name">
+                      <v-list-item-content>
+                        {{test.name}}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
     </v-navigation-drawer>
+
     <v-content>
-      <v-app-bar class="address-bar">
-        <v-select
-          :items="httpMethods"
-          label="Method"
-          class="http-method-select"
-        ></v-select>
-        <v-text-field
-          label="API Endpoint Address"
-          ></v-text-field>
-         <!-- <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="First name"
-            required
-          ></v-text-field> -->
-      </v-app-bar>
-      <v-navigation-drawer>
-        <v-list-item>
-          Test config settings here...
-        </v-list-item>
-
-        <v-list
-          dense
-          nav
-        >
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-        <HelloWorld/>
+      <Main/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Main from './components/Main';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Main,
   },
   data: () => ({
     items: [],
@@ -91,6 +68,51 @@ export default {
       'PUT',
       'PATCH',
       'DELETE'
+    ],
+    testProjects: [
+      {
+        name: "Enviari API",
+        description: "An API to streamline shipping product around the world.",
+        tests: [
+          {
+            name: "Get Customers",
+            method: "GET",
+            uri: "https://api.notarealsite.com/customers"
+          },
+          {
+            name: "Post Customers",
+            method: "POST",
+            uri: "https://api.notarealsite.com/customers"
+          },
+          {
+            name: "Put Customers",
+            method: "PUT",
+            uri: "https://api.notarealsite.com/customers"
+          }
+        ],
+        collections: [
+          {
+            name: "Shipments",
+            tests: [
+              {
+                name: "Get Shipments",
+                method: "GET",
+                uri: "https://api.notarealsite.com/shipments"
+              },
+              {
+                name: "Post Shipments",
+                method: "POST",
+                uri: "https://api.notarealsite.com/shipments"
+              },
+              {
+                name: "Put Shipments",
+                method: "PUT",
+                uri: "https://api.notarealsite.com/shipments"
+              }
+            ]
+          }
+        ]
+      }
     ]
   }),
 };
