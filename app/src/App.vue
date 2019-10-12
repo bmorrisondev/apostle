@@ -6,6 +6,8 @@
           <div class="sidebar-title">
             APOSTLE
           </div>
+            <button class="btn btn-primary" @click="displayNewProjectModal()">Test</button>
+            <b-button v-b-modal.modal-1>Launch demo modal</b-button>
         </div>
       </div>
         <div
@@ -45,6 +47,11 @@
     <div class="content">
       <Main/>
     </div>
+
+    <b-modal ref="modal-1" title="BootstrapVue">
+      <p class="my-4">Hello from modal!</p>
+    </b-modal>
+
   </div>
 </template>
 
@@ -57,14 +64,6 @@ export default {
     Main,
   },
   data: () => ({
-    items: [],
-    httpMethods: [
-      'GET',
-      'POST',
-      'PUT',
-      'PATCH',
-      'DELETE'
-    ],
     testProjects: [
       {
         name: "Enviari API",
@@ -111,10 +110,18 @@ export default {
       }
     ]
   }),
+  methods: {
+    displayNewProjectModal: function(shouldDisplay) {
+      console.log('yes')
+      this.$refs['modal-1'].show();
+    }
+  }
 };
 </script>
 
 <style lang="scss">
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 html {
