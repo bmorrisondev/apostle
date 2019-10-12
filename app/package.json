@@ -16,7 +16,6 @@
     "vue": "^2.6.10",
     "vue-fontawesome": "0.0.2",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -32,7 +31,6 @@
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.6.3",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2"
+    "vue-template-compiler": "^2.6.10"
   }
 }
