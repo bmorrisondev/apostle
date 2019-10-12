@@ -23,16 +23,16 @@
             </div>
             <div dense class="project-list-container">
               <div class="test" v-for="test in project.tests" :key="test.name">
-                <font-awesome-icon icon="terminal" /> <span class="project-test-title">{{test.name}}</span>
+                <span class="project-test-title">{{test.name}}</span>
               </div>
             </div>
             <div >
               <div class="collection" v-for="collection in project.collections" :key="collection.name">
-                <font-awesome-icon icon="list"/> <span class="project-test-collection-title">{{collection.name}}</span>
+                <span class="project-test-collection-title">{{collection.name}}</span>
                 <div class="project-test-collection-container">
                   <div class="menu-list test-list">
-                    <div class="test" v-for="test in collection.tests" :key="test.name">                      
-                      <font-awesome-icon icon="terminal" />  <span class="project-test-title">{{test.name}}</span>
+                    <div class="test" v-for="test in collection.tests" :key="test.name">
+                      <span class="project-test-title">{{test.name}}</span>
                     </div>
                   </div>
                 </div>
@@ -43,8 +43,7 @@
     </div>
 
     <div class="content">
-      <!-- <Main/> -->
-      <div style="background-color: red;"></div>
+      <Main/>
     </div>
   </div>
 </template>
