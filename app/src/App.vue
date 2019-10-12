@@ -1,55 +1,51 @@
 <template>
-  <v-app>
-
-     <v-navigation-drawer app permanent class="app-drawer">
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title app-title">
+  <div class="main-grid">
+     <div class="sidebar">
+      <div>
+        <div>
+          <div class="sidebar-title">
             APOSTLE
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-        <v-list-item
+          </div>
+        </div>
+      </div>
+        <div
           v-for="project in testProjects"
           :key="project.name"
+          class="project"
         >
           <!-- <v-list-item-icon>
             <font-awesome-icon icon="angle-right" />
           </v-list-item-icon> -->
 
-          <v-list-item-content>
-            <v-list-item-title>
-              <b>{{ project.name }}</b>
-            </v-list-item-title>
-            <v-list dense class="menu-list test-list">
-              <v-list-item class="test" v-for="test in project.tests" :key="test.name">
-                <v-list-item-content>
-                  {{test.name}}
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-            <v-list dense class="menu-list collection-list">
-              <v-list-item class="collection" v-for="collection in project.collections" :key="collection.name">
-                <v-list-item-content>
-                  <b>{{collection.name}}</b>
-                  <v-list class="menu-list test-list">
-                    <v-list-item class="test" v-for="test in collection.tests" :key="test.name">
-                      <v-list-item-content>
-                        {{test.name}}
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-list-item-content>
-        </v-list-item>
-    </v-navigation-drawer>
+          <div>
+            <div>
+              <span class="project-title">{{ project.name }}</span>
+            </div>
+            <div dense class="project-list-container">
+              <div class="test" v-for="test in project.tests" :key="test.name">
+                <span class="project-test-title">{{test.name}}</span>
+              </div>
+            </div>
+            <div >
+              <div class="collection" v-for="collection in project.collections" :key="collection.name">
+                <span class="project-test-collection-title">{{collection.name}}</span>
+                <div class="project-test-collection-container">
+                  <div class="menu-list test-list">
+                    <div class="test" v-for="test in collection.tests" :key="test.name">
+                      <span class="project-test-title">{{test.name}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 
-    <v-content>
+    <div class="content">
       <Main/>
-    </v-content>
-  </v-app>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -118,7 +114,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 html {
   overflow: auto !important;
   scrollbar-width: none;
@@ -129,16 +127,61 @@ html::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
-.app-drawer {
-  background-color: #094074 !important;
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Open Sans', sans-serif;
 }
-.app-title {
-  color: white;
-}
-.address-bar {
-  z-index: 9999;
-}
-.http-method-select {
-  max-width: 200px;
+
+.main-grid {
+  display: inline-grid;
+  grid-auto-columns: min-content 1fr auto;
+  background-color: #eee;
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+
+  .sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #094074 !important;
+    color: white;
+
+    .sidebar-title {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .project-list-container {
+      span {
+        font-size: 16px;
+      }
+    }
+
+    .project-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .project-test-collection-container {
+      margin-left: 12px;
+      .project-test-title {
+        margin-left: 8px;
+      }
+    }
+
+    .project-test-collection-title {
+      margin-left: 8px;
+      font-weight: bold;
+    }
+  }
+
+  .content {
+    grid-column: 2
+  }
 }
 </style>
