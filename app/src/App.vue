@@ -6,23 +6,23 @@
           <div class="sidebar-title">
             APOSTLE
           </div>
-            <button class="new-project-button" @click="displayNewProjectModal()">
-              <font-awesome-icon icon="plus"/><span>New Project</span>
-            </button>
+          <button class="new-project-button project-button" @click="displayNewProjectModal()">
+            <font-awesome-icon icon="plus"/><span>New Project</span>
+          </button>
+          <button class="open-project-button project-button" @click="displayOpenProjectDialog()">
+            <font-awesome-icon icon="box-open"/><span>Open Project</span>
+          </button>
+          <input id="fileInput" type="file" @change="loadProject"/>
         </div>
       </div>
         <div
-          v-for="project in testProjects"
+          v-for="project in projects"
           :key="project.name"
           class="project"
         >
-          <!-- <v-list-item-icon>
-            <font-awesome-icon icon="angle-right" />
-          </v-list-item-icon> -->
-
           <div>
             <div>
-              <span class="project-title">{{ project.name }}</span>
+              <span class="project-title">{{ project.projectName }}</span>
             </div>
             <div dense class="project-list-container">
               <div class="test" v-for="test in project.tests" :key="test.name">
@@ -73,11 +73,20 @@
 <script>
 import Main from './components/Main';
 import fs from 'fs';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components: {
     Main,
+  },
+  computed: mapState([
+    'openProjects'
+  ]),
+  watch: {
+    openProjects(newValue, oldValue) {
+      this.projects = newValue;
+    }
   },
   data: () => ({
     isModalActive: false,
@@ -126,9 +135,14 @@ export default {
           }
         ]
       }
-    ]
+    ],
+    projects: {}
   }),
   methods: {
+    ...mapMutations([
+      'addProject'
+    ]),
+
     displayNewProjectModal: function(shouldDisplay) {
       this.isModalActive = true;
     },
@@ -166,6 +180,32 @@ export default {
       } catch (exc) {
         console.error('Unable to save new project', exc)
       }
+    },
+
+    displayOpenProjectDialog: function() {
+      document.getElementById('fileInput').click()
+    },
+
+    loadProject: function (event) {
+      console.log(event)
+      let file = event.target.files[0];
+
+      new Promise((resolve, reject) => {
+        let fileReader = new FileReader();
+        fileReader.readAsText(file, "UTF-8");
+        fileReader.onload = function (fileReaderEvent) {
+          resolve(fileReaderEvent.target.result);
+        }
+        fileReader.onerror = function (err) {
+          reject(err);
+        }
+      }).then(contents => {
+          let project = JSON.parse(contents)
+          this.addProject(project);
+        })
+        .catch(err => {
+          console.error(err)
+        })
     }
   }
 };
@@ -215,7 +255,7 @@ html, body {
       margin-bottom: 12px;
     }
 
-    .new-project-button {
+    .project-button {
       width: 100%;
       color: white;
       background: none;
@@ -230,6 +270,10 @@ html, body {
       &:hover {
         background-color: #03294d;
       }
+    }
+
+    #fileInput {
+      display: none;
     }
 
     .project-list-container {
