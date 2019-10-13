@@ -6,8 +6,9 @@
           <div class="sidebar-title">
             APOSTLE
           </div>
-            <button class="btn btn-primary" @click="displayNewProjectModal()">Test</button>
-            <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+            <button class="new-project-button" @click="displayNewProjectModal()">
+              <font-awesome-icon icon="plus"/><span>New Project</span>
+            </button>
         </div>
       </div>
         <div
@@ -48,8 +49,22 @@
       <Main/>
     </div>
 
-    <b-modal ref="modal-1" title="BootstrapVue">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal class="new-project-modal" v-model="isModalActive" hide-footer  title="New Project">
+      <div class="new-project-modal-content">
+        <b-form-group
+          label-cols-sm="4"
+          label-cols-lg="3"
+          description="This is the project name that will display in the sidebar."
+          label="Project Name"
+          label-for="input-horizontal"
+          >
+          <b-form-input id="new-project-name-input" v-model="newProjectName"></b-form-input>
+        </b-form-group>
+        <div class="button-container">
+          <button class="modal-button btn btn-primary" @click="saveNewProject()">Ok</button>
+          <button class="modal-button btn btn-outline-primary" @click="closeNewProjectModal()">Cancel</button>
+        </div>
+      </div>
     </b-modal>
 
   </div>
@@ -57,6 +72,7 @@
 
 <script>
 import Main from './components/Main';
+import fs from 'fs';
 
 export default {
   name: 'App',
@@ -64,6 +80,8 @@ export default {
     Main,
   },
   data: () => ({
+    isModalActive: false,
+    newProjectName: null,
     testProjects: [
       {
         name: "Enviari API",
@@ -112,8 +130,42 @@ export default {
   }),
   methods: {
     displayNewProjectModal: function(shouldDisplay) {
-      console.log('yes')
-      this.$refs['modal-1'].show();
+      this.isModalActive = true;
+    },
+
+    closeNewProjectModal: function() {
+      this.isModalActive = false;
+    },
+
+    saveNewProject: function () {
+      let fileName = this.newProjectName.toLowerCase().split(" ").join("-");
+      let projectShell = {
+        projectName: this.newProjectName,
+        createdOn: new Date(),
+        tests: [],
+        collections: []
+      }
+
+      try {
+        const data = JSON.stringify(projectShell)
+        const blob = new Blob([data], {type: 'text/plain'})
+        const e = document.createEvent('MouseEvents');
+        const a = document.createElement('a');
+        a.download = `${fileName}.json`;
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+        e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
+
+        // Cleanup
+        this.newProjectName = null;
+        this.isModalActive = false;
+
+        // TODO: Load the new project into the state
+        // TODO: Load the watched files into the config state
+      } catch (exc) {
+        console.error('Unable to save new project', exc)
+      }
     }
   }
 };
@@ -163,6 +215,23 @@ html, body {
       margin-bottom: 12px;
     }
 
+    .new-project-button {
+      width: 100%;
+      color: white;
+      background: none;
+      border: none;
+      border-radius: 4px;
+      padding: 4px;
+
+      span {
+        margin-left: 4px;
+      }
+
+      &:hover {
+        background-color: #03294d;
+      }
+    }
+
     .project-list-container {
       span {
         font-size: 16px;
@@ -190,5 +259,9 @@ html, body {
   .content {
     grid-column: 2
   }
+}
+
+.modal-button {
+  margin-right: 10px;
 }
 </style>
