@@ -5,18 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    projects: []
+    openProjects: []
+  },
+  getters: {
+    getOpenProjects: (state) => state.openProjects
   },
   mutations: {
-
+    addProject: (state, project) => state.openProjects.push(project)
   },
   actions: {
-    showNewProjectDialog: ({ state, commit }, payload) => {
 
-    },
-
-    createNewProject: ({ state, commit }, payload) => {
-      // display dialog to show
-    }
   },
 });
