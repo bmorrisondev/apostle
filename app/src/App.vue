@@ -6,13 +6,15 @@
           <div class="sidebar-title">
             APOSTLE
           </div>
-          <button class="new-project-button project-button" @click="displayNewProjectModal()">
-            <font-awesome-icon icon="plus"/><span>New Project</span>
-          </button>
-          <button class="open-project-button project-button" @click="displayOpenProjectDialog()">
-            <font-awesome-icon icon="box-open"/><span>Open Project</span>
-          </button>
-          <input id="fileInput" type="file" @change="loadProject"/>
+          <div class="project-actions">
+            <button class="new-project-button project-button" @click="displayNewProjectModal()">
+              <font-awesome-icon icon="plus"/><span>New Project</span>
+            </button>
+            <button class="open-project-button project-button" @click="displayOpenProjectDialog()">
+              <font-awesome-icon icon="box-open"/><span>Open Project</span>
+            </button>
+            <input id="fileInput" type="file" @change="loadProject"/>
+          </div>
         </div>
       </div>
         <div
@@ -66,7 +68,7 @@
           label="Project Name"
           label-for="input-horizontal"
           >
-          <b-form-input id="new-project-name-input" v-model="newProjectName"></b-form-input>
+          <b-form-input id="new-project-name-input" v-model="newProjectName" @keyup.enter.prevent="saveNewProject()"></b-form-input>
         </b-form-group>
         <div class="button-container">
           <button class="modal-button btn btn-primary" @click="saveNewProject()">Ok</button>
@@ -160,6 +162,9 @@ export default {
     },
 
     saveNewProject: function () {
+      if(!this.newProjectName){
+        return;
+      }
       let fileName = this.newProjectName.toLowerCase().split(" ").join("-");
       let projectShell = {
         projectName: this.newProjectName,
@@ -270,6 +275,12 @@ html, body {
       border: none;
       border-radius: 4px;
       padding: 4px;
+      text-align: left;
+
+      svg{
+        width: 2rem;
+        text-align: left;
+      }
 
       span {
         margin-left: 4px;
@@ -348,5 +359,20 @@ html, body {
 
 .modal-button {
   margin-right: 10px;
+  border: #03294d solid 1px;
 }
+
+.modal-button.btn-primary{
+  background-color:#03294d;
+}
+
+.modal-button.btn-outline-primary{
+  color:#03294d;
+}
+
+.modal-button:hover{
+  background-color:#094074;
+  color:#eee;
+}
+
 </style>
