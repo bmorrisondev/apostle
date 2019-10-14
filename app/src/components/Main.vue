@@ -89,7 +89,7 @@ export default {
 
   .address-bar {
     display: flex;
-    height: 5vh;
+    height: auto;
     background-color: white;
     border-bottom: 1px solid #ddd;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.03);
@@ -130,7 +130,7 @@ export default {
 
   .options-panel {
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: white;
     padding: 16px;
     margin-bottom: 16px;
@@ -152,6 +152,8 @@ export default {
     height: 100%;
     width: 100%;
     font-family: monospace;
+    border: none;
+    resize: none;
   }
 }
 </style>
