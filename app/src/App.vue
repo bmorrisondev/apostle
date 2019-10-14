@@ -21,8 +21,16 @@
           class="project"
         >
           <div>
-            <div>
+            <div class="project-title-container">
               <span class="project-title">{{ project.projectName }}</span>
+              <b-dropdown class="project-new-resource-button">
+                <template v-slot:button-content>
+                  <font-awesome-icon icon="bars" />
+                </template>
+                <b-dropdown-item href="#">Unload</b-dropdown-item>
+                <b-dropdown-item href="#">Test</b-dropdown-item>
+                <b-dropdown-item href="#">Collection</b-dropdown-item>
+              </b-dropdown>
             </div>
             <div dense class="project-list-container">
               <div class="test" v-for="test in project.tests" :key="test.name">
@@ -282,11 +290,44 @@ html, body {
       }
     }
 
-    .project-title {
-      font-size: 22px;
-      font-weight: bold;
-    }
+    .project-title-container {
+      display: grid;
+      grid-template-areas:
+        "title button";
 
+      grid-template-columns: 1fr 30px;
+      // grid-auto-columns: min-content auto 1fr ;
+      font-size: 16px;
+      width: 100%;
+
+      .project-title {
+        font-weight: bold;
+      }
+
+      .project-new-resource-button {
+        grid-column: 2;
+        max-width: 20px;
+        font-size: 12px;
+
+        .btn {
+          margin: 0px;
+          padding: 0px 4px;
+          background: none;
+          border: none;
+          opacity: 0.5;
+
+          &:hover {
+            opacity: 1;
+            background-color: #03294d;
+          }
+
+          &::after {
+            content: none;
+          }
+        }
+      }
+
+    }
     .project-test-collection-container {
       margin-left: 12px;
       .project-test-title {
