@@ -151,6 +151,7 @@ export default {
   .request-body-textarea {
     height: 100%;
     width: 100%;
+    font-family: monospace;
     border: none;
     resize: none;
   }
