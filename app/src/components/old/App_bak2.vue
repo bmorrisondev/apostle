@@ -1,16 +1,54 @@
 <template>
   <div class="main-grid">
-    <div class="topbar">
-      <TopBar />
+     <div class="sidebar">
+      <div>
+        <div>
+          <div class="sidebar-title">
+            APOSTLE
+          </div>
+          <div class="project-actions">
+            <button class="new-project-button project-button" @click="displayNewProjectModal()">
+              <font-awesome-icon icon="plus"/><span>New Project</span>
+            </button>
+            <button class="open-project-button project-button" @click="displayOpenProjectDialog()">
+              <font-awesome-icon icon="box-open"/><span>Open Project</span>
+            </button>
+            <input id="fileInput" type="file" @change="loadProject"/>
+          </div>
+        </div>
+      </div>
+        <div
+          v-for="project in projects"
+          :key="project.name"
+          class="project"
+        >
+          <div>
+            <div>
+              <span class="project-title">{{ project.projectName }}</span>
+            </div>
+            <div dense class="project-list-container">
+              <div class="test" v-for="test in project.tests" :key="test.name">
+                <span class="project-test-title">{{test.name}}</span>
+              </div>
+            </div>
+            <div >
+              <div class="collection" v-for="collection in project.collections" :key="collection.name">
+                <span class="project-test-collection-title">{{collection.name}}</span>
+                <div class="project-test-collection-container">
+                  <div class="menu-list test-list">
+                    <div class="test" v-for="test in collection.tests" :key="test.name">
+                      <span class="project-test-title">{{test.name}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="project-sidebar">
-      <ProjectSidebar />
-    </div>
-    <div class="main-content">
+
+    <div class="content">
       <Main/>
-    </div>
-    <div class="request-options-sidebar">
-      <OptionsSidebar />
     </div>
 
     <b-modal class="new-project-modal" v-model="isModalActive" hide-footer  title="New Project">
@@ -36,10 +74,6 @@
 
 <script>
 import Main from './components/Main';
-import TopBar from './components/TopBar';
-import ProjectSidebar from './components/ProjectSidebar';
-import OptionsSidebar from './components/OptionsSidebar';
-
 import fs from 'fs';
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
@@ -47,9 +81,6 @@ export default {
   name: 'App',
   components: {
     Main,
-    TopBar,
-    ProjectSidebar,
-    OptionsSidebar
   },
   computed: mapState([
     'openProjects'
@@ -62,6 +93,51 @@ export default {
   data: () => ({
     isModalActive: false,
     newProjectName: null,
+    testProjects: [
+      {
+        name: "Enviari API",
+        description: "An API to streamline shipping product around the world.",
+        tests: [
+          {
+            name: "Get Customers",
+            method: "GET",
+            uri: "https://api.notarealsite.com/customers"
+          },
+          {
+            name: "Post Customers",
+            method: "POST",
+            uri: "https://api.notarealsite.com/customers"
+          },
+          {
+            name: "Put Customers",
+            method: "PUT",
+            uri: "https://api.notarealsite.com/customers"
+          }
+        ],
+        collections: [
+          {
+            name: "Shipments",
+            tests: [
+              {
+                name: "Get Shipments",
+                method: "GET",
+                uri: "https://api.notarealsite.com/shipments"
+              },
+              {
+                name: "Post Shipments",
+                method: "POST",
+                uri: "https://api.notarealsite.com/shipments"
+              },
+              {
+                name: "Put Shipments",
+                method: "PUT",
+                uri: "https://api.notarealsite.com/shipments"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     projects: {}
   }),
   methods: {
@@ -157,33 +233,23 @@ html::-webkit-scrollbar {
 }
 
 html, body {
-  height: 100vw;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   padding: 0px;
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
 }
 
 .main-grid {
-  display: grid;
-  grid-auto-rows: min-content 1fr auto;
-  grid-auto-columns: min-content 3fr;
+  display: inline-grid;
+  grid-auto-columns: min-content 1fr auto;
   background-color: #eee;
-  height: 100vw;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   padding: 0px;
   margin: 0px;
 
-  .topbar {
-    grid-column: 1 / 3;
-    height: 55px;
-    width: 100vw;
-    background-color: red;
-  }
-
-  .project-sidebar {
-    grid-column: 1;
-    grid-row: 2;
+  .sidebar {
     width: 250px;
     padding: 20px;
     background-color: #094074 !important;
@@ -245,18 +311,8 @@ html, body {
     }
   }
 
-  .main-content {
-    background-color: green;
-    width: 100%;
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .request-options-sidebar {
-    width: 250px;
-    background-color: orange;
-    grid-column: 3;
-    grid-row: 2;
+  .content {
+    grid-column: 2
   }
 }
 

@@ -1,5 +1,56 @@
 <template>
   <div class="body-main-container grid-wrapper">
+    <div class='grid-top'>
+      <div class="address-bar">
+        <select class="method-select">
+          <option v-for="method in httpMethods" :key="method">{{method}}</option>
+        </select>
+        <input class="address-input" type="text" placeholder="API Endpoint Address">
+        <button class="address-submit">
+           <font-awesome-icon icon="search" />
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-left">
+      <div class="options-panel">
+        <div class="options-panel-title">Params</div>
+        <div class="options-panel-content">
+          A table of query parameters will go here.
+        </div>
+      </div>
+
+      <div class="options-panel">
+        <div class="options-panel-title">Auth</div>
+        <div class="options-panel-content">
+          Authentication settings will go here.
+        </div>
+      </div>
+
+
+      <div class="options-panel">
+        <div class="options-panel-title">Headers</div>
+        <div class="options-panel-content">
+          Key value pair of headers will be displayed here, as well as auto-generated headers.
+        </div>
+      </div>
+
+
+      <div class="options-panel">
+        <div class="options-panel-title">Variables</div>
+        <div class="options-panel-content">
+          A custom list of variables used in this request.
+        </div>
+      </div>
+
+
+      <div class="options-panel">
+        <div class="options-panel-title">Body Templates</div>
+        <div class="options-panel-content">
+          Alternate body templates can be saved into this section
+        </div>
+      </div>
+    </div>
     <div class="grid-right">
       <textarea class="request-body-textarea"></textarea>
     </div>
