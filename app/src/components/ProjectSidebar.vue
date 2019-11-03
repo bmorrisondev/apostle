@@ -1,49 +1,55 @@
 <template>
   <div class="sidebar">
-    <div>
-      <div>
-        <div class="sidebar-title">
-          APOSTLE
+    <div class="sidebar-upper">
+      <div class="panel">
+        <div class="panel-header">
+          Open Requests
         </div>
-        <div class="project-actions">
-          <button class="new-project-button project-button" @click="displayNewProjectModal()">
-            <font-awesome-icon icon="plus"/><span>New Project</span>
-          </button>
-          <button class="open-project-button project-button" @click="displayOpenProjectDialog()">
-            <font-awesome-icon icon="box-open"/><span>Open Project</span>
-          </button>
-          <input id="fileInput" type="file" @change="loadProject"/>
+        <div class="panel-body">
+          requests go here...
         </div>
       </div>
     </div>
-      <div
-        v-for="project in projects"
-        :key="project.name"
-        class="project"
-      >
-        <div>
-          <div>
-            <span class="project-title">{{ project.projectName }}</span>
-          </div>
-          <div dense class="project-list-container">
-            <div class="test" v-for="test in project.tests" :key="test.name">
-              <span class="project-test-title">{{test.name}}</span>
-            </div>
-          </div>
-          <div >
-            <div class="collection" v-for="collection in project.collections" :key="collection.name">
-              <span class="project-test-collection-title">{{collection.name}}</span>
-              <div class="project-test-collection-container">
-                <div class="menu-list test-list">
-                  <div class="test" v-for="test in collection.tests" :key="test.name">
-                    <span class="project-test-title">{{test.name}}</span>
+    <div class="sidebar-lower">
+      <div class="panel">
+        <div class="panel-header">
+          Projects
+        </div>
+        <div class="panel-body">
+          <div
+            v-for="project in projects"
+            :key="project.name"
+            class="project"
+          >
+            <div>
+              <div>
+                <span class="project-title">{{ project.projectName }}</span>
+              </div>
+              <div dense class="project-list-container">
+                <div class="test" v-for="test in project.tests" :key="test.name">
+                  <span class="project-test-title">{{test.name}}</span>
+                </div>
+              </div>
+              <div >
+                <div class="collection" v-for="collection in project.collections" :key="collection.name">
+                  <span class="project-test-collection-title">{{collection.name}}</span>
+                  <div class="project-test-collection-container">
+                    <div class="menu-list test-list">
+                      <div class="test" v-for="test in collection.tests" :key="test.name">
+                        <span class="project-test-title">{{test.name}}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!--/projects -->
         </div>
       </div>
+    </div>
+    <div class="sidebar-footer">
+      user functions, footer stuffs
+    </div>
   </div>
 </template>
 
@@ -141,6 +147,41 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.sidebar {
+  display: grid;
+  grid-auto-rows: min-content 1fr auto;
 
+  .sidebar-upper {
+    grid-row: 1;
+  }
+
+  .sidebar-lower{
+    grid-row: 2;
+    height: 100vh;
+  }
+
+  .sidebar-footer {
+    grid-row: 3;
+    height: 50px;
+    background-color: blue;
+  }
+}
+.panel {
+  height: 100%;
+
+  .panel-header {
+    height: 24px;
+    background-color: #333;
+    color: #ddd;
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  .panel-body {
+    height: 100%;
+    background-color: #444;
+    padding: 2px;
+  }
+}
 </style>

@@ -157,11 +157,12 @@ html::-webkit-scrollbar {
 }
 
 html, body {
-  height: 100vw;
-  width: 100vw;
+  // height: 100vw;
+  // width: 100vw;
   padding: 0px;
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
 }
 
 .main-grid {
@@ -185,7 +186,6 @@ html, body {
     grid-column: 1;
     grid-row: 2;
     width: 250px;
-    padding: 20px;
     background-color: #094074 !important;
     color: white;
 
