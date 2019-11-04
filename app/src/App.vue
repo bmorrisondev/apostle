@@ -157,8 +157,7 @@ html::-webkit-scrollbar {
 }
 
 html, body {
-  // height: 100vw;
-  // width: 100vw;
+  height: 100%;
   padding: 0px;
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
@@ -170,13 +169,14 @@ html, body {
   grid-auto-rows: min-content 1fr auto;
   grid-auto-columns: min-content 3fr;
   background-color: #eee;
-  height: 100vw;
+  height: 100%;
   width: 100vw;
   padding: 0px;
   margin: 0px;
 
   .topbar {
     grid-column: 1 / 3;
+    grid-row: 1;
     height: 55px;
     width: 100vw;
     background-color: red;
@@ -189,33 +189,33 @@ html, body {
     background-color: #094074 !important;
     color: white;
 
-    .sidebar-title {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
+    // .sidebar-title {
+    //   font-size: 32px;
+    //   margin-bottom: 12px;
+    // }
 
-    .project-button {
-      width: 100%;
-      color: white;
-      background: none;
-      border: none;
-      border-radius: 4px;
-      padding: 4px;
-      text-align: left;
+    // .project-button {
+    //   width: 100%;
+    //   color: white;
+    //   background: none;
+    //   border: none;
+    //   border-radius: 4px;
+    //   padding: 4px;
+    //   text-align: left;
 
-      svg{
-        width: 2rem;
-        text-align: left;
-      }
+    //   svg{
+    //     width: 2rem;
+    //     text-align: left;
+    //   }
 
-      span {
-        margin-left: 4px;
-      }
+    //   span {
+    //     margin-left: 4px;
+    //   }
 
-      &:hover {
-        background-color: #03294d;
-      }
-    }
+    //   &:hover {
+    //     background-color: #03294d;
+    //   }
+    // }
 
     #fileInput {
       display: none;

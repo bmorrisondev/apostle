@@ -16,6 +16,9 @@
           Projects
         </div>
         <div class="panel-body">
+          Open a Project
+        </div>
+        <div class="panel-body-excluded">
           <div
             v-for="project in projects"
             :key="project.name"
@@ -150,7 +153,8 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   display: grid;
-  grid-auto-rows: min-content 1fr auto;
+  grid-auto-rows: min-content auto 50px;
+  height: 100%;
 
   .sidebar-upper {
     grid-row: 1;
@@ -158,7 +162,6 @@ export default {
 
   .sidebar-lower{
     grid-row: 2;
-    height: 100vh;
   }
 
   .sidebar-footer {
@@ -179,9 +182,9 @@ export default {
   }
 
   .panel-body {
-    height: 100%;
     background-color: #444;
     padding: 2px;
+    height: 100%;
   }
 }
 </style>
