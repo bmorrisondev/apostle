@@ -168,18 +168,16 @@ html, body {
   display: grid;
   grid-auto-rows: min-content 1fr auto;
   grid-auto-columns: min-content 3fr;
-  background-color: #eee;
+  background-color: #222;
   height: 100%;
   width: 100vw;
   padding: 0px;
   margin: 0px;
 
   .topbar {
-    grid-column: 1 / 3;
+    grid-column: 2;
     grid-row: 1;
     height: 55px;
-    width: 100vw;
-    background-color: red;
   }
 
   .project-sidebar {

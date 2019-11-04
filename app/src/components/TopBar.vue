@@ -1,6 +1,6 @@
 <template>
   <div class='grid-top'>
-    <div class="address-bar">
+    <div class="omnibar">
       <select class="method-select">
         <option v-for="method in httpMethods" :key="method">{{method}}</option>
       </select>
@@ -14,7 +14,6 @@
 
 <script>
 export default {
-
   data: () => ({
     items: [],
     httpMethods: [
@@ -28,6 +27,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.omnibar {
+  padding: 12px;
+}
 </style>
