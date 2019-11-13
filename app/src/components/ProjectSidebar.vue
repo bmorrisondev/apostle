@@ -16,9 +16,11 @@
           Projects
         </div>
         <div class="panel-body">
-          Open a Project
-        </div>
-        <div class="panel-body-excluded">
+          <div class="open-project-button-wrapper">
+            <button id="openProjectButton" class="btn btn-primary" @click="displayOpenProjectDialog">
+              Open a Project
+            </button>
+          </div>
           <div
             v-for="project in projects"
             :key="project.name"
@@ -26,22 +28,22 @@
           >
             <div>
               <div>
-                <span class="project-title">{{ project.projectName }}</span>
+               <font-awesome-icon icon="atlas"/><span class="project-title">{{ project.projectName }}</span>
               </div>
-              <div dense class="project-list-container">
-                <div class="test" v-for="test in project.tests" :key="test.name">
-                  <span class="project-test-title">{{test.name}}</span>
-                </div>
-              </div>
-              <div >
+              <div>
                 <div class="collection" v-for="collection in project.collections" :key="collection.name">
-                  <span class="project-test-collection-title">{{collection.name}}</span>
-                  <div class="project-test-collection-container">
-                    <div class="menu-list test-list">
+                  <div class="project-collection-container">
+                    <font-awesome-icon icon="vials"/><span class="project-collection-title">{{collection.name}}</span>
+                    <div class="menu-list test-list project-list-container">
                       <div class="test" v-for="test in collection.tests" :key="test.name">
-                        <span class="project-test-title">{{test.name}}</span>
+                        <font-awesome-icon icon="vial"/> <span class="project-test-title">{{test.name}}</span>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="project-list-container">
+                  <div class="test" v-for="test in project.tests" :key="test.name">
+                    <font-awesome-icon icon="vial"/><span class="project-test-title">{{test.name}}</span>
                   </div>
                 </div>
               </div>
@@ -53,6 +55,7 @@
     <div class="sidebar-footer">
       user functions, footer stuffs
     </div>
+    <input id="fileInput" type="file" @change="loadProject"/>
   </div>
 </template>
 
@@ -183,8 +186,37 @@ export default {
 
   .panel-body {
     background-color: #444;
-    padding: 2px;
+    padding: 3px;
     height: 100%;
+
+    .open-project-button-wrapper {
+      width: 100%;
+      display: flex;
+      padding: 5px 0px;
+    }
+
+    .project-title {
+      font-weight: 250;
+      padding-left: 5px;
+    }
+
+    .project-collection-title {
+      padding-left: 5px;
+    }
+
+    .project-collection-container, .project-list-container {
+      padding-left: 10px;
+    }
+
+    .project-test-title {
+      padding-left: 5px;
+    }
+  }
+
+  #openProjectButton {
+    margin: 0 auto;
+    background-color: #2a3566;
+    border: 1px solid #2a3566;
   }
 }
 </style>

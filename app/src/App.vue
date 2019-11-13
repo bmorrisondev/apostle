@@ -218,29 +218,6 @@ html, body {
     #fileInput {
       display: none;
     }
-
-    .project-list-container {
-      span {
-        font-size: 16px;
-      }
-    }
-
-    .project-title {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .project-test-collection-container {
-      margin-left: 12px;
-      .project-test-title {
-        margin-left: 8px;
-      }
-    }
-
-    .project-test-collection-title {
-      margin-left: 8px;
-      font-weight: bold;
-    }
   }
 
   .main-content {
